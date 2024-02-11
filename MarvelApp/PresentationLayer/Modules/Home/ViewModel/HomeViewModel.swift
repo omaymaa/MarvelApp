@@ -19,7 +19,9 @@ final class HomeViewModel {
         return self.charactersSubject.asObserver()
     }
     public var selectedCharacter = PublishSubject<MarvelCharacters>()
-    
+    private var allCharacters: [MarvelCharacters] = []
+    public var isLoading: BehaviorSubject<Bool> = BehaviorSubject(value: false)
+        
     private let disposeBag = DisposeBag()
     // MARK: Methods
     
@@ -27,31 +29,39 @@ final class HomeViewModel {
         fetchCharacters()
     }
     
+    func loadMore() {
+        isLoading.onNext(true) // Notify loading start
+        fetchCharacters()
+       }
+    
     private func fetchCharacters() {
-        repository.getCharacters()
-            .asObservable()
-            .subscribe { [weak self] in
-                guard let self else { return }
-                self.charactersSubject.onNext($0)
-            }.disposed(by: disposeBag)
-    }
-    
-    
-   
-    
-    
-    
+            repository.getCharacters()
+                .asObservable()
+                .subscribe { [weak self] event in
+                    guard let self = self else { return }
+                    
+                    self.isLoading.onNext(false) // Notify loading stop
+                    
+                    switch event {
+                    case .next(let newCharacters):
+                        print("Received new characters: \(newCharacters)")
+                        
+                        if newCharacters.isEmpty {
+                            // Handle end of data or error
+                            print("No new characters.")
+                        } else {
+                            self.allCharacters += newCharacters
+                            self.charactersSubject.onNext(self.allCharacters)
+                            print("All characters so far: \(self.allCharacters)")
+                        }
+                    case .error(let error):
+                        // Handle error
+                        print("Error fetching characters: \(error)")
+                    default:
+                        break
+                    }
+                }
+                .disposed(by: disposeBag)
+        }
 }
 
-
-//    private func subscribeToLoadMore() {
-//            currentDisplayedItemSubject
-//                .filter { $0 > 0 }
-//                .filter { ((try? self.searchResultsSubject.value())?.count ?? 0) - 2 == $0 }
-//                .subscribe(onNext: { [weak self] _ in
-//                    guard let strongSelf = self else { return }
-//                    if let keyword = try? strongSelf.searchTextSubject.value() {
-//                        strongSelf.loadMovies(with: keyword)
-//                    }
-//                }).disposed(by: disposeBag)
-//    }

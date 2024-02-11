@@ -43,16 +43,22 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupActivityIndicator()
+        setupLoadMoreTrigger()
         subscribe(to: viewModel.charactersList)
+        
         tableView.rx.itemSelected
             .compactMap { (self.tableView.cellForRow(at:$0) as? MarvelTableViewCell)?.character }
-          //  .bind(to: viewModel.selectedCharacter)
             .subscribe(onNext: {
                 self.showCharacterDetail(for: $0)
             } )
             .disposed(by: disposeBag)
         
-
+        viewModel.isLoading
+                    .distinctUntilChanged()
+                    .subscribe(onNext: { [weak self] isLoading in
+                        isLoading ? self?.startLoading() : self?.stopLoading()
+                    })
+                    .disposed(by: disposeBag)
     }
 
     private func subscribe(to observable: Observable<[MarvelCharacters]>) {
@@ -60,6 +66,22 @@ class HomeViewController: UIViewController {
             .map { $0.map {
                 SectionModel(model: $0.name, items: [$0]) } }
             .bind(to: tableView.rx.items(dataSource: self.dataSource))
+            .disposed(by: disposeBag)
+    }
+    
+    private func setupLoadMoreTrigger() {
+        tableView.rx.didScroll
+            .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
+            .filter { [weak self] in
+                guard let self = self else { return false }
+                let offsetY = self.tableView.contentOffset.y
+                let contentHeight = self.tableView.contentSize.height
+                let screenHeight = self.tableView.bounds.height
+                return offsetY > contentHeight - screenHeight
+            }
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.loadMore()
+            })
             .disposed(by: disposeBag)
     }
 
@@ -80,8 +102,6 @@ class HomeViewController: UIViewController {
 
         navigationController?.pushViewController(detailsVC, animated: true)
     }
- 
-
 
     func startLoading() {
         activityIndicator.startAnimating()

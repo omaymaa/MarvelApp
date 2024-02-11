@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+
 protocol HomeApiRepository: RemoteAPI {
-    func getMarvelCharachters() -> Single<MarvelModel> 
+    func getMarvelCharacters(offset: Int, limit: Int) -> Single<MarvelModel>
 }

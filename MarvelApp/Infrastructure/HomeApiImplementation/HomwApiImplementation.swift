@@ -7,9 +7,12 @@
 
 import Foundation
 import RxSwift
+
 final class HomwApiImplementation: HomeApiRepository {
-    func getMarvelCharachters() -> Single<MarvelModel> {
-        request(endPoint: "characters", method: .get, parameters: nil)
+    func getMarvelCharacters(offset: Int, limit: Int) -> Single<MarvelModel> {
+        let parameters = ["offset": offset, "limit": limit]
+        let url = "characters"
+        
+        return request(endPoint: url, method: .get, parameters: parameters)
     }
-    
 }

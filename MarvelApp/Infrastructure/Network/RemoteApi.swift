@@ -28,7 +28,7 @@ extension RemoteAPI {
         let apiConstants = "?ts=\(timestamp)&apikey=\(publicKey)&hash=\(hash)"
 
         return Single.create { single in
-           let request = AF.request("\(baseUrl)\(endPoint)\(apiConstants)", method: method, parameters: parameters, encoding: JSONEncoding.default).responseDecodable(of: T.self, decoder: JSONDecoder()) { response in
+           let request = AF.request("\(baseUrl)\(endPoint)\(apiConstants)", method: method, parameters: parameters, encoding: URLEncoding.default).responseDecodable(of: T.self, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let resultObject):
                     single(.success(resultObject))
