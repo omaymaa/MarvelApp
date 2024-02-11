@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MarvelCategoryCollectionViewCell" customModule="MarvelApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="164" height="350"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="164" height="350"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hbW-h2-JE9">
+                        <rect key="frame" x="0.0" y="0.0" width="164" height="220"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="220" id="ULH-vE-eLF"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcn-qs-SV2">
+                        <rect key="frame" x="10" y="240" width="144" height="100"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="hbW-h2-JE9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="8fj-em-eai"/>
+                <constraint firstAttribute="trailing" secondItem="mcn-qs-SV2" secondAttribute="trailing" constant="10" id="O7o-9X-MjW"/>
+                <constraint firstItem="mcn-qs-SV2" firstAttribute="top" secondItem="hbW-h2-JE9" secondAttribute="bottom" constant="20" id="Rk5-9d-x1N"/>
+                <constraint firstAttribute="trailing" secondItem="hbW-h2-JE9" secondAttribute="trailing" id="Znu-sr-ThC"/>
+                <constraint firstAttribute="bottom" secondItem="mcn-qs-SV2" secondAttribute="bottom" constant="10" id="bHL-Il-EYH"/>
+                <constraint firstItem="mcn-qs-SV2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="mdP-F1-SSh"/>
+                <constraint firstItem="hbW-h2-JE9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="u8f-WW-4KY"/>
+            </constraints>
+            <size key="customSize" width="164" height="350"/>
+            <connections>
+                <outlet property="marvelCategoryImg" destination="hbW-h2-JE9" id="bUI-QX-dPm"/>
+                <outlet property="marvelCategoryName" destination="mcn-qs-SV2" id="IAT-ly-urs"/>
+            </connections>
+            <point key="canvasLocation" x="30.534351145038165" y="124.64788732394366"/>
+        </collectionViewCell>
+    </objects>
+</document>
