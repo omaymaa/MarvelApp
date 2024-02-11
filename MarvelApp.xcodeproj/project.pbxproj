@@ -47,6 +47,10 @@
 		428C3D632B795FC5002D90B3 /* CharacterDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 428C3D622B795FC5002D90B3 /* CharacterDetails.storyboard */; };
 		428C3D652B79604D002D90B3 /* Gallery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 428C3D642B79604D002D90B3 /* Gallery.storyboard */; };
 		42A9D6DF2B77DBFB0061E79D /* MarvelDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A9D6DE2B77DBFB0061E79D /* MarvelDetailsViewModel.swift */; };
+		42EA0ED02B79717C001D3458 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42EA0ECF2B79717C001D3458 /* Splash.storyboard */; };
+		42EA0ED22B797190001D3458 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EA0ED12B797190001D3458 /* SplashViewController.swift */; };
+		42EA0ED62B797400001D3458 /* GifToManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EA0ED52B797400001D3458 /* GifToManage.swift */; };
+		42EA0ED82B7975C9001D3458 /* splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 42EA0ED72B7975C9001D3458 /* splash.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +108,10 @@
 		428C3D622B795FC5002D90B3 /* CharacterDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CharacterDetails.storyboard; sourceTree = "<group>"; };
 		428C3D642B79604D002D90B3 /* Gallery.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
 		42A9D6DE2B77DBFB0061E79D /* MarvelDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelDetailsViewModel.swift; sourceTree = "<group>"; };
+		42EA0ECF2B79717C001D3458 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
+		42EA0ED12B797190001D3458 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		42EA0ED52B797400001D3458 /* GifToManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifToManage.swift; sourceTree = "<group>"; };
+		42EA0ED72B7975C9001D3458 /* splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = splash.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +249,7 @@
 		4220F3FE2B765B8300C37E81 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				42EA0ECD2B79715A001D3458 /* Splash */,
 				4220F3FF2B765BC800C37E81 /* Home */,
 				4220F4472B7692F200C37E81 /* Details */,
 				420897072B78289500854C03 /* Gallery */,
@@ -441,8 +450,27 @@
 			isa = PBXGroup;
 			children = (
 				42452D152B78ED3F0027966E /* UIStoryBoard.swift */,
+				42EA0ED52B797400001D3458 /* GifToManage.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		42EA0ECD2B79715A001D3458 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				42EA0ECE2B79716F001D3458 /* View */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		42EA0ECE2B79716F001D3458 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				42EA0ED72B7975C9001D3458 /* splash.gif */,
+				42EA0ECF2B79717C001D3458 /* Splash.storyboard */,
+				42EA0ED12B797190001D3458 /* SplashViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -569,6 +597,8 @@
 				4220F3DB2B765B6E00C37E81 /* LaunchScreen.storyboard in Resources */,
 				4220F3D82B765B6E00C37E81 /* Assets.xcassets in Resources */,
 				4220F44D2B76989B00C37E81 /* MarvelCategoryCollectionViewCell.xib in Resources */,
+				42EA0ED02B79717C001D3458 /* Splash.storyboard in Resources */,
+				42EA0ED82B7975C9001D3458 /* splash.gif in Resources */,
 				4220F3D62B765B6C00C37E81 /* Main.storyboard in Resources */,
 				428C3D632B795FC5002D90B3 /* CharacterDetails.storyboard in Resources */,
 				4220F4052B7660D700C37E81 /* Home.storyboard in Resources */,
@@ -601,6 +631,7 @@
 				42452D162B78ED3F0027966E /* UIStoryBoard.swift in Sources */,
 				42A9D6DF2B77DBFB0061E79D /* MarvelDetailsViewModel.swift in Sources */,
 				4220F43D2B76723800C37E81 /* HomeRepository.swift in Sources */,
+				42EA0ED22B797190001D3458 /* SplashViewController.swift in Sources */,
 				420897162B7828E900854C03 /* GalleryViewController.swift in Sources */,
 				4220F4112B7661D200C37E81 /* MarvelTableViewCell.swift in Sources */,
 				4220F40F2B76619A00C37E81 /* MarvelModel.swift in Sources */,
@@ -617,6 +648,7 @@
 				4220F44C2B76989B00C37E81 /* MarvelCategoryCollectionViewCell.swift in Sources */,
 				4220F4442B7692E300C37E81 /* SectionTableViewCell.swift in Sources */,
 				4220F4072B76612200C37E81 /* HomeViewController.swift in Sources */,
+				42EA0ED62B797400001D3458 /* GifToManage.swift in Sources */,
 				4220F4422B7692D400C37E81 /* MarvelDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
