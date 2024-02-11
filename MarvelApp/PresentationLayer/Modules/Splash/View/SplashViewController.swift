@@ -18,10 +18,14 @@ class SplashViewController: UIViewController {
     
     func start() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
-            let vc = AppStoryboard.Home.viewController(viewControllerClass: HomeViewController.self)
-            let vcWithNavigation = UINavigationController(rootViewController: vc)
-            keyWindow?.rootViewController = vcWithNavigation
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+
+                let vc = AppStoryboard.Home.viewController(viewControllerClass: HomeViewController.self)
+                let vcWithNavigation = UINavigationController(rootViewController: vc)
+                keyWindow.rootViewController = vcWithNavigation
+            }
         }
     }
+
 }
