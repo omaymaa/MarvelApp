@@ -38,4 +38,4 @@ This iOS application allows users to browse the Marvel library of characters usi
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/MarvelCharactersApp.git](https://github.com/omaymaa/MarvelApp.git)https://github.com/omaymaa/MarvelApp.git
+   git clone https://github.com/your-username/MarvelCharactersApp.git
