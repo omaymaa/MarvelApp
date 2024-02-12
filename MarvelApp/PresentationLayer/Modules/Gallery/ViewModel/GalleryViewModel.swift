@@ -20,18 +20,14 @@ class GalleryViewModel {
     let currentPage: Observable<Int>
     let numberOfPages: Observable<String>
 
-    private var timer: Timer?
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     init() {
         numberOfPages = data.map { "\($0.count)" }
 
         // Initialize currentPage observable
-        currentPage = Observable.combineLatest(selectedIndex, data)
-            .map { selectedIndex, data in
-                let adjustedIndex = (selectedIndex < data.count) ? selectedIndex : 0
-                return adjustedIndex + 1  // Adjusting for 1-based index
-            }
+        currentPage = selectedIndex
+            .map { $0 + 1 }  // Adjusting for 1-based index
 
         setupBindings()
     }
@@ -41,27 +37,12 @@ class GalleryViewModel {
         self.selectedIndex.onNext(selectedIndex)
     }
 
-    private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
-    }
-
-    @objc func fireTimer() {
-        do {
-            let currentValue = try selectedIndex.value()
-            let newDataCount = try data.value().count
-
-            selectedIndex.onNext((currentValue < newDataCount - 1) ? (currentValue + 1) : 0)
-        } catch {
-            print("Error getting current page value: \(error)")
-        }
-    }
-
     func nextPressed() {
         do {
-            let currentValue = try selectedIndex.value()
             let newDataCount = try data.value().count
 
-            selectedIndex.onNext((currentValue < newDataCount - 1) ? (currentValue + 1) : 0)
+            let nextIndex = (try selectedIndex.value() + 1) % newDataCount
+            selectedIndex.onNext(nextIndex)
         } catch {
             print("Error getting current page value: \(error)")
         }
@@ -69,10 +50,10 @@ class GalleryViewModel {
 
     func previousPressed() {
         do {
-            let currentValue = try selectedIndex.value()
             let newDataCount = try data.value().count
 
-            selectedIndex.onNext((currentValue > 0) ? (currentValue - 1) : newDataCount - 1)
+            let previousIndex = (try selectedIndex.value() - 1 + newDataCount) % newDataCount
+            selectedIndex.onNext(previousIndex)
         } catch {
             print("Error getting current page value: \(error)")
         }
@@ -94,10 +75,6 @@ class GalleryViewModel {
 
     func scrollViewDidEndDecelerating(withIndex index: Int) {
         // Update the selectedIndex
-        selectedIndex.onNext(index + 1) // Adjusting for 1-based index
-    }
-
-    deinit {
-        timer?.invalidate()
+        selectedIndex.onNext(index)
     }
 }

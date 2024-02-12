@@ -34,37 +34,33 @@ class GalleryViewController: UIViewController {
     }
 
     private func setupBindings() {
-        // Bindings for data
         viewModel.data
-            .observe(on: MainScheduler.instance) // Ensure UI updates are on the main thread
-            .bind(to: collectionView.rx.items(cellIdentifier: "GalleryCollectionViewCell", cellType: GalleryCollectionViewCell.self)) { (index, element, cell) in
-                // Update the cell content
-                cell.itemName.text = element.name
+            .observe(on: MainScheduler.instance)
+            .bind(to: collectionView.rx.items(cellIdentifier: "GalleryCollectionViewCell", cellType: GalleryCollectionViewCell.self)) { (_, storiesItem, cell) in
+                cell.itemName.text = storiesItem.name
                 cell.itemImage.image = UIImage(named: "icn-nav-marvel")
-
             }
             .disposed(by: disposeBag)
 
-        // Bindings for currentPage and numberOfPages
         viewModel.currentPage
             .map { "\($0)" }
             .bind(to: numberOfPagesLabel.rx.text)
             .disposed(by: disposeBag)
 
-        // Bindings for closePressed, nextPressed, and previousPressed
         forwardButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance) // Adjust the throttle duration as needed
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.onNextPressed.onNext(())
             })
             .disposed(by: disposeBag)
 
         backForward.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance) // Adjust the throttle duration as needed
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.onPreviousPressed.onNext(())
             })
             .disposed(by: disposeBag)
 
-        // Bind scrollViewDidEndDecelerating
         collectionView.rx.didEndDecelerating
             .subscribe(onNext: { [weak self] _ in
                 self?.scrollViewDidEndDecelerating()

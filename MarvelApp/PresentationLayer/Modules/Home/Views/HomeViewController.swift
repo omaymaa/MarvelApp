@@ -42,6 +42,12 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let titleImageView = UIImageView(image: UIImage(named: "icn-nav-marvel"))
+        titleImageView.contentMode = .scaleToFill
+        let imageSize = CGSize(width: 120, height: 32)
+        titleImageView.frame = CGRect(origin: .zero, size: imageSize)
+        navigationItem.titleView = titleImageView
+
         setupActivityIndicator()
         setupLoadMoreTrigger()
         subscribe(to: viewModel.charactersList)
